@@ -81,7 +81,7 @@ jobs:
 
       - name: Report Failure Status on Slack
         if: failure()
-        uses: ravsamhq/notify-slack-action@master
+        uses: ravsamhq/notify-slack-action@1.4.0
         with:
           status: ${{ job.status }}
           notify_when: 'failure'
@@ -93,7 +93,7 @@ jobs:
 
       - name: Report New Release on Slack
         if: success() && steps.cache.outputs.cache-hit != 'true'
-        uses: ravsamhq/notify-slack-action@master
+        uses: ravsamhq/notify-slack-action@1.4.0
         with:
           status: ${{ job.status }}
           notification_title: 'Bmad Distribution Pipeline'
