@@ -67,7 +67,7 @@ jobs:
 
       - name: Deploy New Release for Distribution - ${{ env.BMADDIST }}
         if: steps.cache.outputs.cache-hit != 'true'
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v0.1.6
         with:
           tag_name: "${{ env.BMADTAG }}"
           target_commitish: "${{ env.RELEASE_COMMIT }}"
