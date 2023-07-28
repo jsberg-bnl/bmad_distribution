@@ -27,7 +27,7 @@ jobs:
       - name: Check Latest Release
         id: checkrel
         run: |
-          if rel=$(curl https://www.classe.cornell.edu/~cesrulib/downloads/latest_distribution_file_prefix)
+          if rel=$(curl -L --connect-timeout 5 https://www.classe.cornell.edu/~cesrulib/downloads/latest_distribution_file_prefix)
           then
              echo Latest release is: $rel
              echo BMADDIST=$rel >> $GITHUB_ENV
