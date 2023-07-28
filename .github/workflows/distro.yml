@@ -29,6 +29,7 @@ jobs:
         run: |
           if rel=$(curl -L --connect-timeout 5 https://www.classe.cornell.edu/~cesrulib/downloads/latest_distribution_file_prefix)
           then
+             echo $rel | grep -E -q '^bmad_dist_[0-9]{4}_[0-9]{4}-[0-9]$' || exit 1
              echo Latest release is: $rel
              echo BMADDIST=$rel >> $GITHUB_ENV
              echo BMADTAG=$(echo $rel | cut -c11- | tr -d _) >> $GITHUB_ENV
