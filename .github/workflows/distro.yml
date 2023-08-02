@@ -71,37 +71,13 @@ jobs:
 
       - name: Deploy New Release for Distribution - ${{ env.BMADDIST }}
         if: steps.cache.outputs.cache-hit != 'true'
-        uses: softprops/action-gh-release@v0.1.6
-        with:
-          tag_name: "${{ env.BMADTAG }}"
-          target_commitish: "${{ env.RELEASE_COMMIT }}"
-          fail_on_unmatched_files: true
-          draft: false
-          body: "Bmad Distribution - ${{ env.BMADDIST }}"
-          files: |
-            ${{ env.BMADDIST }}.tgz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo I would have made a release
 
       - name: Report Failure Status on Slack
         if: failure() && steps.checkrel.conclusion == 'success'
-        uses: ravsamhq/notify-slack-action@1.4.0
-        with:
-          status: ${{ job.status }}
-          notify_when: 'failure'
-          notification_title: 'Bmad Distribution Pipeline Failed'
-          message_format: ':poop: *{workflow}* failed. Please check more details at <https://github.com/bmad-sim/bmad_distribution/actions/workflows/distro.yml|{repo}>.'
-          footer: ''
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
+        run: echo I would have reported failure on Slack
+        
       - name: Report New Release on Slack
         if: success() && steps.cache.outputs.cache-hit != 'true'
-        uses: ravsamhq/notify-slack-action@1.4.0
-        with:
-          status: ${{ job.status }}
-          notification_title: 'Bmad Distribution Pipeline'
-          message_format: ':tada: *{workflow}* produced a new release of Bmad. Check it out at <https://github.com/bmad-sim/bmad_distribution/releases|{repo}>.'
-          footer: ''
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: echo I would have reported a new release on Slack
+        
