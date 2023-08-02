@@ -43,21 +43,20 @@ jobs:
 
       - name: Install Bmad - ${{ env.BMADDIST }}
         if: steps.cache.outputs.cache-hit != 'true'
-        run: .github/scripts/install_bmad.sh
+        run: |
+          echo Fake success
+          exit 0
 
       - name: Run Tests - ${{ env.BMADDIST }}
         if: steps.cache.outputs.cache-hit != 'true'
-        run: .github/scripts/run_tests.sh
+        run: |
+          echo Fake failure
+          exit 1
 
       - name: Add Empty Commit for New Release
         if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'main'
-          message: "Update distribution to ${{ env.BMADDIST }}"
-          empty: true
-
+        run: echo Would have committed new release
+        
       - name: Record Release Commit Hash
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
