@@ -2,8 +2,6 @@ name: Distribution - Test and Release
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 */1 * * *'  # every hour
 
 jobs:
   build:
